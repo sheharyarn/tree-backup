@@ -3,6 +3,7 @@
 require 'fileutils'
 
 
+COMMAND = '/usr/local/bin/tree -N'
 PREFIX  = '/Volumes'
 OUTPUT  = '/Users/Psy/.trees/'
 VOLUMES = {
@@ -28,7 +29,7 @@ end
 # (Command prints characters as-is)
 # Consider using json/html tree output
 def tree(path)
-  `tree -N #{path}`
+  `#{COMMAND} #{path}`
 end
 
 
