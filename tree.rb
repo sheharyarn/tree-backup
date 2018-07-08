@@ -82,6 +82,9 @@ def main
   log('=================== START ===================')
   VOLUMES.keys.map { |v| fork_volume_check(v) }.map(&:join)
   log('==================== END ====================')
+rescue => ex
+  log('=============== !! CRASHED !! ===============')
+  raise ex
 end
 
 
