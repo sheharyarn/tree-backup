@@ -53,7 +53,11 @@ def write_tree(path, name)
   dir  = File.dirname(out)
 
   FileUtils.mkdir_p(dir)
-  File.write(out, tree(path))
+  File.open(out, 'w') do |f|
+    f.write tree(path)
+    f.write "\n"
+    f.write " Printed at: #{Time.now}\n"
+  end
 end
 
 
