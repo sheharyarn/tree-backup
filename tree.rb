@@ -8,6 +8,7 @@ PREFIX  = '/Volumes'
 OUTPUT  = '/Users/Psy/.trees/'
 
 VOLUMES = {
+  'Macintosh HD'  => [],
   'Ouroboros'     => ['Anime'],
   'Core'          => ['Shows'],
 }
@@ -21,6 +22,7 @@ FLAGS = [
 ].join(' ')
 
 
+
 # Get the full path of the volume
 def location(volume)
   File.join(PREFIX, volume)
@@ -29,8 +31,11 @@ end
 
 # Check if a volume is mounted
 def mounted?(volume)
-  mount = `mount | grep '#{location(volume)}'`
-  !mount.empty?
+  if (volume == 'Macintosh HD')
+    return true
+  else
+    not (`mount | grep '#{location(volume)}'`).empty?
+  end
 end
 
 
