@@ -3,13 +3,22 @@
 require 'fileutils'
 
 
-COMMAND = '/usr/local/bin/tree -N'
+COMMAND = '/usr/local/bin/tree'
 PREFIX  = '/Volumes'
 OUTPUT  = '/Users/Psy/.trees/'
+
 VOLUMES = {
-  'Ouroboros' => ['Anime'],
-  'Core'      => ['Shows'],
+  'Ouroboros'     => ['Anime'],
+  'Core'          => ['Shows'],
 }
+
+FLAGS = [
+  '--dirsfirst',    # Print directories first
+  '--du',           # Print directory/file sizes
+  '-h',             # Print them in human-readable format
+  '-N',             # Print special characters as-is
+  '-F',             # Append symbols for appropriate filetypes
+].join(' ')
 
 
 # Get the full path of the volume
@@ -20,17 +29,17 @@ end
 
 # Check if a volume is mounted
 def mounted?(volume)
-  mount = `mount | grep #{location(volume)}`
+  mount = `mount | grep '#{location(volume)}'`
   !mount.empty?
 end
 
 
 # Get the full tree of a path
-# (Command prints characters as-is)
 # Consider using json/html tree output
 def tree(path)
-  `#{COMMAND} #{path}`
+  `#{COMMAND} #{FLAGS} '#{path}'`
 end
+
 
 
 # Save the tree of a path
