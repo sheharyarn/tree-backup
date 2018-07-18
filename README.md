@@ -29,4 +29,13 @@ ln -s ~/code/ruby/tree/me.sheharyar.scripts.tree.plist ~/Library/LaunchAgents/
 launchctl load -w ~/Library/LaunchAgents/me.sheharyar.scripts.tree.plist
 ```
 
+#### Dropbox Sync
+
+```bash
+# Initial Move
+mv ~/.trees/ ~/Dropbox/Other\ Stuff/.trees/
+
+# Create Shortcut
+ln -s ~/Dropbox/Other\ Stuff/.trees ~/.trees
+```
 
