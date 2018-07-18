@@ -4,6 +4,8 @@ tree-backup
 > Background job that continously backs up 'trees'
 > of specified Volume paths locally
 
+![Tree Backup Screenshot][screenshot]
+
 
 ## Setup
 
@@ -38,4 +40,8 @@ mv ~/.trees/ ~/Dropbox/Other\ Stuff/.trees/
 # Create Shortcut
 ln -s ~/Dropbox/Other\ Stuff/.trees ~/.trees
 ```
+
+
+
+  [screenshot]: https://i.imgur.com/ZaxZi3R.png
 
