@@ -7,7 +7,7 @@ require 'yaml'
 COMMAND = '/usr/local/bin/tree'
 PREFIX  = '/Volumes'
 OUTPUT  = '/Users/Psy/.trees/'
-CONFIG  = 'config.yml'
+CONFIG  = '/Users/Psy/.trees/config.yml'
 
 FLAGS = [
   '--dirsfirst',    # Print directories first
