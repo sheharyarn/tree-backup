@@ -1,12 +1,12 @@
 ---
 volumes:
-  - Macintosh HD: []
-  - Slayer:
+  Macintosh HD: []
+  Slayer:
     - Videos/Cartoons
     - Videos/Movies
     - Videos/Shows
-  - Core:
+  Core:
     - Shows
-  - Ouroboros:
+  Ouroboros:
     - Anime
 
