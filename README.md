@@ -21,8 +21,11 @@ git clone git@github.com:sheharyarn/tree-backup.git ~/code/ruby/tree
 # Make executable
 sudo chmod a+x ~/code/ruby/tree/tree.rb
 
-# Create base path for logs
+# Create directory for trees & logs
 mkdir -p ~/.trees/
+
+# Link Configs
+ln -s ~/code/ruby/tree/config.yml ~/.trees/config.yml
 
 # Link launchd plist
 ln -s ~/code/ruby/tree/me.sheharyar.scripts.tree.plist ~/Library/LaunchAgents/
