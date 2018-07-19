@@ -1,17 +1,13 @@
 #!/usr/bin/env ruby
 
 require 'fileutils'
+require 'yaml'
 
 
 COMMAND = '/usr/local/bin/tree'
 PREFIX  = '/Volumes'
 OUTPUT  = '/Users/Psy/.trees/'
-
-VOLUMES = {
-  'Macintosh HD'  => [],
-  'Ouroboros'     => ['Anime'],
-  'Core'          => ['Shows'],
-}
+CONFIG  = 'config.yml'
 
 FLAGS = [
   '--dirsfirst',    # Print directories first
@@ -21,6 +17,18 @@ FLAGS = [
   '-F',             # Append symbols for appropriate filetypes
 ].join(' ')
 
+
+
+# Get configs
+def config
+  @config ||= YAML.load_file(CONFIG)
+end
+
+
+# Get all volumes and their paths
+def volumes
+  @volumes ||= config['volumes']
+end
 
 
 # Get the full path of the volume
@@ -72,7 +80,7 @@ def fork_volume_check(v)
   Thread.new do
     if mounted?(v)
       log("Volume '#{v}' mounted.")
-      VOLUMES[v].map { |d| fork_tree_write(v,d) }
+      volumes[v].map { |d| fork_tree_write(v,d) }
     else
       log("Volume '#{v}' not mounted. Doing nothing.")
     end
@@ -98,7 +106,7 @@ end
 # Main Code
 def main
   log('=================== START ===================')
-  VOLUMES.keys.map { |v| fork_volume_check(v) }.map(&:join)
+  volumes.keys.map { |v| fork_volume_check(v) }.map(&:join)
   log('==================== END ====================')
 rescue => ex
   log('=============== !! CRASHED !! ===============')
