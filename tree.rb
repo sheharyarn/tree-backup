@@ -20,14 +20,12 @@ FLAGS = [
 
 
 # Get configs
-def config
-  @config ||= YAML.load_file(CONFIG)
-end
-
-
-# Get all volumes and their paths
-def volumes
-  @volumes ||= config['volumes']
+def config(key = nil)
+  if key
+    config[key.to_s]
+  else
+    @config ||= YAML.load_file(CONFIG)
+  end
 end
 
 
@@ -80,7 +78,7 @@ def fork_volume_check(v)
   Thread.new do
     if mounted?(v)
       log("Volume '#{v}' mounted.")
-      volumes[v].map { |d| fork_tree_write(v,d) }
+      config(:volumes)[v].map { |d| fork_tree_write(v,d) }
     else
       log("Volume '#{v}' not mounted. Doing nothing.")
     end
@@ -106,7 +104,7 @@ end
 # Main Code
 def main
   log('=================== START ===================')
-  volumes.keys.map { |v| fork_volume_check(v) }.map(&:join)
+  config(:volumes).keys.map { |v| fork_volume_check(v) }.map(&:join)
   log('==================== END ====================')
 rescue => ex
   log('=============== !! CRASHED !! ===============')
